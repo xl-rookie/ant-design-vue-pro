@@ -10,6 +10,8 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/user',
+    // 标志位
+    hideInMenu: true,
     // component: RenderRouterView,
     // component: { render: h => h('router-view') }, // render函数
     component: () => import('../layouts/UserLayout'),
@@ -42,11 +44,13 @@ const routes = [
       {
         path: '/dashboard',
         name: 'dashboard',
+        meta: { icon: 'dashboard', tittle: '仪表盘' },
         component: { render: h => h('router-view') },
         children: [
           {
             path: '/dashboard/analysis',
             name: 'analysis',
+            meta: { tittle: '分析页' },
             component: () => import('../views/Dashboard/Analysis')
           }
         ]
@@ -55,16 +59,21 @@ const routes = [
       {
         path: '/form',
         name: 'form',
+        meta: { icon: 'form', tittle: '表单' },
         component: { render: h => h('router-view') },
         children: [
           {
             path: '/form/basic-form',
             name: 'basic-form',
+            meta: { tittle: '基础表单' },
             component: () => import('../views/Forms/basicForm')
           },
           {
             path: '/form/step-form',
             name: 'stepform',
+            meta: { tittle: '分布表单' },
+            // 标志位，拒绝渲染孩子路由
+            hideChildrenMenu: true,
             component: () => import('../views/Forms/StepForm'),
             children: [
               {
@@ -95,6 +104,7 @@ const routes = [
   {
     path: '*',
     name: '404',
+    hideInMenu: true,
     component: NotFound
   }
 ]
