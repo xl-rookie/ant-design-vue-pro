@@ -35,6 +35,7 @@ const routes = [
   },
   {
     path: '/',
+    meta: { authority: ['user', 'admin'] },
     component: () => import('../layouts/BasicLayout'),
     children: [
       {
@@ -59,7 +60,7 @@ const routes = [
       {
         path: '/form',
         name: 'form',
-        meta: { icon: 'form', tittle: '表单' },
+        meta: { icon: 'form', tittle: '表单', authority: ['admin'] },
         component: { render: h => h('router-view') },
         children: [
           {
